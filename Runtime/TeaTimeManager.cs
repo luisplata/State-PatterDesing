@@ -1,33 +1,29 @@
-﻿using BellsebossStudio.Plugins.ServiceLocatorPattern;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace BellsebossStudio.Plugins.State
+public class TeaTimeManager : MonoBehaviour, ITeaTimeManager
 {
-    public class TeaTimeManager : MonoBehaviour, ITeaTimeManager
+    private void Awake()
     {
-        private void Awake()
+        //search if Exists a TeaTimeManager
+        if (FindObjectsOfType<TeaTimeManager>().Length > 1)
         {
-            //search if Exists a TeaTimeManager
-            if (FindObjectsOfType<TeaTimeManager>().Length > 1)
-            {
-                Destroy(gameObject);
-                return;
-            }
-
-            if (ServiceLocator.Instance.RegisterService<ITeaTimeManager>(this))
-            {
-                DontDestroyOnLoad(gameObject);
-            }
+            Destroy(gameObject);
+            return;
         }
 
-        public MonoBehaviour GetMonoBehaviour()
+        if (ServiceLocator.Instance.RegisterService<ITeaTimeManager>(this))
         {
-            return this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 
-    public interface ITeaTimeManager
+    public MonoBehaviour GetMonoBehaviour()
     {
-        MonoBehaviour GetMonoBehaviour();
+        return this;
     }
+}
+
+public interface ITeaTimeManager
+{
+    MonoBehaviour GetMonoBehaviour();
 }
