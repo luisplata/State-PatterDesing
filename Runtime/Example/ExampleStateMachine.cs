@@ -5,29 +5,29 @@ namespace BellsebossStudio.Plugins.State
 {
     public class ExampleStateMachine : MonoBehaviour
     {
-        private StateMachine _stateMachine;
+        private StateMachinePattern _stateMachinePattern;
 
         private void Start()
         {
-            _stateMachine = new StateMachine();
+            _stateMachinePattern = new StateMachinePattern();
             var firstState = new MetaDataState
             {
                 id = "firstState",
                 isFirst = true,
                 nextStateId = "secondState",
             };
-            _stateMachine.AddState(firstState, new ExampleInitialState());
+            _stateMachinePattern.AddState(firstState, new ExampleInitialState());
 
             var secondState = new MetaDataState { id = "secondState" };
-            _stateMachine.AddState(secondState, new ExampleInitialState());
+            _stateMachinePattern.AddState(secondState, new ExampleInitialState());
 
-            _stateMachine.Configure();
+            _stateMachinePattern.Configure();
             StartCoroutine(StateMachine());
         }
 
         private IEnumerator StateMachine()
         {
-            var currentState = _stateMachine.GetState();
+            var currentState = _stateMachinePattern.GetState();
             while (currentState is not null)
             {
                 currentState.OnEnterState();
@@ -39,7 +39,7 @@ namespace BellsebossStudio.Plugins.State
                     yield return null;
                 }
                 currentState.OnExitState();
-                currentState = _stateMachine.GetState(_stateMachine.GetNextState());
+                currentState = _stateMachinePattern.GetState(_stateMachinePattern.GetNextState());
             }
 
             Debug.Log("State Finished");

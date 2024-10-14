@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace BellsebossStudio.Plugins.State
 {
-    public class StateMachine
+    public class StateMachinePattern
     {
         private Dictionary<MetaDataState, IState> _states;
         private MetaDataState _currentState;
 
-        public StateMachine()
+        public StateMachinePattern()
         {
             _states = new Dictionary<MetaDataState, IState>();
         }
