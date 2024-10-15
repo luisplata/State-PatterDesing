@@ -3,7 +3,7 @@
   "version": "1.0.6",
   "displayName": "State Pattern for Unity",
   "description": "A base implementation of the State pattern for Unity.",
-  "unity": "2021.1",
+  "unity": "2021.3",
   "keywords": ["state", "pattern", "unity"],
   "author": {
     "name": "Luis Plata",
