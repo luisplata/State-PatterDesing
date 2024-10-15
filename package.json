@@ -1,6 +1,6 @@
 {
   "name": "com.bellseboss.state",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "displayName": "State Pattern for Unity",
   "description": "A base implementation of the State pattern for Unity.",
   "unity": "2021.3",
@@ -10,7 +10,7 @@
     "email": "www.luisplata@gmail.com"
   },
   "dependencies": {
-    "com.bellseboss.servicelocator": "https://github.com/luisplata/ServiceLocatorToUnity.git"
+    "com.bellseboss.servicelocator": "https://github.com/luisplata/ServiceLocatorToUnity.git#master"
   },
   "repository": {
     "type": "git",
