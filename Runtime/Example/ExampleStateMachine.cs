@@ -10,16 +10,9 @@ namespace BellsebossStudio.Plugins.State
         private void Start()
         {
             _stateMachinePattern = new StateMachinePattern();
-            var firstState = new MetaDataState
-            {
-                id = "firstState",
-                isFirst = true,
-                nextStateId = "secondState",
-            };
-            _stateMachinePattern.AddState(firstState, new ExampleInitialState());
-
-            var secondState = new MetaDataState { id = "secondState" };
-            _stateMachinePattern.AddState(secondState, new ExampleInitialState());
+            _stateMachinePattern.AddState(new ExampleInitialState());
+            
+            _stateMachinePattern.AddState(new SecondState());
 
             _stateMachinePattern.Configure();
             StartCoroutine(StateMachine());

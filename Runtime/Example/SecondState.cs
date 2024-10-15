@@ -1,22 +1,19 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class ExampleInitialState : IState
+public class SecondState : IState
 {
     private TeaTime _teaTime;
     private float _deltaTimeLocal;
     private MetaDataState _metaDataState;
 
-    public ExampleInitialState()
+    public SecondState()
     {
         _teaTime = new TeaTime(ServiceLocator.Instance.GetService<ITeaTimeManager>().GetMonoBehaviour());
         _metaDataState = new MetaDataState
         {
-            id = "ExampleInitialState",
-            nextStateId = "SecondState",
-            isFirst = true
+            id = "SecondState"
         };
-
-        _teaTime.Pause().Add(2, () => { Debug.Log($"{nameof(ExampleInitialState)} Start state"); }).Loop(handler =>
+        _teaTime.Pause().Add(2, () => { Debug.Log($"{nameof(SecondState)} Start state"); }).Loop(handler =>
         {
             _deltaTimeLocal += handler.deltaTime;
             if (_deltaTimeLocal > 5)
@@ -24,15 +21,15 @@ public class ExampleInitialState : IState
                 handler.Break();
                 if (Mathf.Approximately(_deltaTimeLocal, 5))
                 {
-                    _metaDataState.nextStateId = "ThirdState";
+                    _metaDataState.nextStateId = "ExampleInitialState";
                 }
                 else
                 {
-                    _metaDataState.nextStateId = "SecondState";
+                    _metaDataState.nextStateId = ""; //finisher loop
                 }
             }
 
-            Debug.Log($"{nameof(ExampleInitialState)} Example to delta time {_deltaTimeLocal} ");
+            Debug.Log($"{nameof(SecondState)} Example to delta time {_deltaTimeLocal}");
         });
     }
 
@@ -43,6 +40,7 @@ public class ExampleInitialState : IState
 
     public void OnExitState()
     {
+        _teaTime.Stop();
     }
 
     public bool IsCompleted()

@@ -12,8 +12,9 @@ public class StateMachinePattern
         _states = new Dictionary<MetaDataState, IState>();
     }
 
-    public void AddState(MetaDataState metaData, IState state)
+    public void AddState(IState state)
     {
+        var metaData = state.GetMetaData();
         //if id is already in the dictionary, throw an exception
         if (_states.Any(teaTime => teaTime.Key.id == metaData.id))
         {
